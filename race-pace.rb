@@ -34,7 +34,7 @@ end
 
 dist_unit = dist_match[2] || "mile"
 dist = dist_match[1]
-hour, min, sec = 0
+hour, min, sec = [0, 0, 0]
 time_parts = ARGV[1].split(':').map {|e| e.to_i}
 case time_parts.length
 	when 1
