@@ -1,0 +1,32 @@
+<html>
+<head>
+<title>Password Generation Tool</title>
+<script src="sha1.js"></script>
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script>
+	function updatePass() {
+		var input = $('#master_pass').val() + ' ' + $('#domain').val()
+		var pass = 'PGT-' + CryptoJS.SHA1(input).toString().substring(0,10);
+		$('#generated-passwd').text(pass);
+	}
+	$(document).ready(function() {
+		$('#domain').on('keydown change', updatePass);
+		$('#master_pass').on('keydown change', updatePass);
+	});
+</script>
+<style>
+#generated-passwd {
+  margin:10px;
+  font-family:Arial;
+  font-size:14px;
+}
+</style>
+</head>
+<body>
+	<div>
+		Pass: <input type="password" id="master_pass">
+		Domain: <input type="text" id="domain">
+	</div>
+	<div id="generated-passwd"></div>
+</body>
+</html>
