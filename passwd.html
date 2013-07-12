@@ -10,8 +10,8 @@
 		$('#generated-passwd').text(pass);
 	}
 	$(document).ready(function() {
-		$('#domain').on('keydown change', updatePass);
-		$('#master_pass').on('keydown change', updatePass);
+		$('#domain').on('keyup change', updatePass);
+		$('#master_pass').on('keyup change', updatePass);
 	});
 </script>
 <style>
