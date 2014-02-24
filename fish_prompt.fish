@@ -1,3 +1,6 @@
+# add symlink to this under
+# ~/.config/fish/functions
+
 function fish_prompt
 	set job_list (jobs -c)
 	set pwd_section (set_color $fish_color_cwd) (prompt_pwd) (set_color normal)
