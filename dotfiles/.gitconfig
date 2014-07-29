@@ -1,0 +1,22 @@
+[user]
+	name = Robert Knight
+	email = robert.knight@mendeley.com
+
+[alias]
+	br = branch --color
+	cam = commit --amend
+	ci = commit
+	ca = commit -a
+	co = checkout
+	d = diff
+	di = diff --cached
+	po = push origin
+	rc = rebase --continue
+	ri = rebase --interactive
+	rst = reset
+	st = status
+	su = submodule update
+	ui = update-index
+
+[color]
+	status = true
