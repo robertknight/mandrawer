@@ -1,1 +1,4 @@
 --ignore-file=is:tags
+--ignore-dir=node_modules
+--ignore-dir=external
+--ignore-dir=build
