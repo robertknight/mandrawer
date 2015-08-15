@@ -1,3 +1,9 @@
+[core]
+	# Fix issue where 'vi $FILE' exits with a non-zero status on Mac
+	# and causes the commit to be discarded,
+	# see http://tooky.co.uk/there-was-a-problem-with-the-editor-vi-git-on-mac-os-x/
+	editor = vim
+
 [user]
 	name = Robert Knight
 	email = robertknight@gmail.com
