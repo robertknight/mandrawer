@@ -1,0 +1,24 @@
+#!/usr/bin/env ruby
+
+# Utility script which prompts to remove each local branch
+# that has been merged into the current branch
+`git branch --merged`.each_line do |branch|
+	branch.strip!
+
+	# the current branch is prefixed with a '*'
+	next if branch =~ /^\*/
+
+	puts "Branch '#{branch}' has been merged into the current branch - remove it?"
+	if gets() =~ /^y/
+		# attempt a safe deletion. This will check whether the branch has
+		# been fully merged into its upstream branch
+		if !system("git branch -d '#{branch}'")
+			# if the local branch hasn't been fully merged, ask if the user
+			# wants to delete it anyway
+			puts "Do you want to forcibly delete this branch?"
+			if gets() =~ /^y/
+				system("git branch -D '#{branch}'")
+			end
+		end
+	end
+end
