@@ -15,7 +15,8 @@
 	ca = commit -a
 	co = checkout
 	d = diff
-	di = diff --cached
+	dc = diff --cached
+	pm = push mine
 	po = push origin
 	rc = rebase --continue
 	ri = rebase --interactive
