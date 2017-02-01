@@ -12,6 +12,14 @@ Plugin 'Quramy/tsuquyomi'
 
 call vundle#end()
 
+" vim-plug setup
+call plug#begin('~/.vim/plugged')
+
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
+
+call plug#end()
+
 " Pathogen setup
 execute pathogen#infect()
 
