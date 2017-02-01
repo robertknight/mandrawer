@@ -9,7 +9,7 @@ from subprocess import PIPE, run
 def main():
     # Check for clean local working tree
     status_res = run(['git', 'status', '--short'], stdout=PIPE)
-    entries = [e for e in status_res.stdout.decode('utf-8').split('\n') if e]
+    entries = [e.strip() for e in status_res.stdout.decode('utf-8').split('\n') if e]
     for entry in entries:
         [status, path] = entry.split(' ')
         if status != '??':
