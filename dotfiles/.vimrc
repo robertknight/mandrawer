@@ -1,27 +1,29 @@
 set nocompatible
 
-" Plugin manager setup
-" --------------------
+" Plugin setup (via vim-plug)
+" ---------------------------
 
-" Vundle plugin setup
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-Plugin 'Shougo/vimproc.vim'
-Plugin 'Quramy/tsuquyomi'
-
-call vundle#end()
-
-" vim-plug setup
 call plug#begin('~/.vim/plugged')
 
+" Async exec library
+Plug 'Shougo/vimproc.vim', {'do': 'make'}
+
+" Fuzzy file finder
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 
-call plug#end()
+" 'ag' (Silver Surfer) integration
+Plug 'mileszs/ack.vim'
 
-" Pathogen setup
-execute pathogen#infect()
+" TypeScript language server integration
+Plug 'Quramy/tsuquyomi'
+
+Plug 'editorconfig/editorconfig-vim'
+
+" Linter integration
+Plug 'vim-syntastic/syntastic'
+
+call plug#end()
 
 " Basic editor settings
 " ---------------------
