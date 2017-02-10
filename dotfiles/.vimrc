@@ -21,7 +21,7 @@ Plug 'Quramy/tsuquyomi'
 Plug 'editorconfig/editorconfig-vim'
 
 " Linter integration
-Plug 'vim-syntastic/syntastic'
+Plug 'w0rp/ale'  " nb. Requires Vim 8
 
 call plug#end()
 
@@ -67,20 +67,15 @@ let mandrawer_dir=expand("$HOME/projects/mandrawer")
 :map <F2> :exec("!" . mandrawer_dir . "/ctags.sh")<CR>
 :map <F5> :make<CR>
 
-" Syntastic config.
-" Adapted from the recommendations in
-" https://github.com/vim-syntastic/syntastic#3-recommended-settings
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+" ale config
+let g:ale_linters = {
+\  'javascript': ['eslint'],
+\  'python': ['flake8'],
+\}
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
-let g:syntastic_python_checkers = ['flake8']
-let g:syntastic_javascript_checkers = ['eslint']
+" Display lint errors in status line
+let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
+set statusline+=%{ALEGetStatusLine()}
 
 " `ag` integration
 " See https://github.com/mileszs/ack.vim#can-i-use-ag-the-silver-searcher-with-this
