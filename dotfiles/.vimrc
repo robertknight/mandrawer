@@ -27,6 +27,7 @@ call plug#end()
 
 " Basic editor settings
 " ---------------------
+set backspace=indent,eol,start
 set sw=4
 set ts=4
 set autoindent
