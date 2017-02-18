@@ -17,6 +17,7 @@ Plug 'mileszs/ack.vim'
 
 " TypeScript language server integration
 Plug 'Quramy/tsuquyomi'
+Plug 'leafgarland/typescript-vim'
 
 Plug 'editorconfig/editorconfig-vim'
 
