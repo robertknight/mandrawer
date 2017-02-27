@@ -33,6 +33,7 @@ def install_symlink(src, dest_dir):
 def setup_fish():
     install_symlink('config.fish', FISH_CONFIG_DIR)
     install_symlink('fish_prompt.fish', FISH_FUNC_DIR)
+    install_symlink('setup_gpg_agent.fish', FISH_FUNC_DIR)
 
 
 def symlink_dotfiles():
