@@ -19,6 +19,7 @@ end
 # Language-specific binary dirs
 add_dir_to_path $HOME/projects/go/bin
 add_dir_to_path $HOME/other/go/bin
+add_dir_to_path /usr/local/Cellar/node/7.5.0/bin
 
 # Setup virtualfish for Python
 eval (python -m virtualfish)
