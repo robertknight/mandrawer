@@ -22,7 +22,7 @@ add_dir_to_path $HOME/other/go/bin
 add_dir_to_path /usr/local/Cellar/node/7.5.0/bin
 
 # Setup virtualfish for Python
-eval (python -m virtualfish)
+eval (python -m virtualfish auto_activation)
 
 # Setup autoenv
 # (https://github.com/idan/autoenvfish)
