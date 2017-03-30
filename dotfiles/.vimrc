@@ -45,6 +45,11 @@ filetype plugin on
 filetype indent on
 syntax on
 
+" Show trailing whitespace, except when typing at the end of a line.
+" See http://vim.wikia.com/wiki/Highlight_unwanted_spaces
+:highlight TrailingSpace ctermbg=red guibg=red
+:match TrailingSpace /\s\+\%#\@<!$/
+
 " Language and tool integrations
 " ------------------------------
 
