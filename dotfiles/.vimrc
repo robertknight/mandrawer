@@ -20,9 +20,17 @@ Plug 'Quramy/tsuquyomi'
 Plug 'leafgarland/typescript-vim'
 
 Plug 'editorconfig/editorconfig-vim'
+Plug 'elmcast/elm-vim'
 
 " Linter integration
 Plug 'w0rp/ale'  " nb. Requires Vim 8
+" Plug 'flowtype/vim-flow'
+
+" Automated source formatting
+Plug 'sbdchd/neoformat'
+
+" CoffeeScript
+Plug 'kchmck/vim-coffee-script'
 
 call plug#end()
 
@@ -31,6 +39,7 @@ call plug#end()
 set backspace=indent,eol,start
 set sw=4
 set ts=4
+set tw=80
 set autoindent
 set linebreak
 set mouse=a
@@ -89,4 +98,3 @@ set statusline+=%{ALEGetStatusLine()}
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
-
