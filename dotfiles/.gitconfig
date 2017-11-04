@@ -7,6 +7,7 @@
 [user]
 	name = Robert Knight
 	email = robertknight@gmail.com
+	signingkey = 0F65A27D
 
 [alias]
 	br = branch --color
@@ -27,3 +28,5 @@
 
 [color]
 	status = true
+[gpg]
+	program = gpg
