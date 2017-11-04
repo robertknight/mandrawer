@@ -15,6 +15,9 @@ Plug 'junegunn/fzf.vim'
 " 'ag' (Silver Surfer) integration
 Plug 'mileszs/ack.vim'
 
+" (F)ind (A)nd (R)eplace
+Plug 'brooth/far.vim'
+
 " TypeScript language server integration
 Plug 'Quramy/tsuquyomi'
 Plug 'leafgarland/typescript-vim'
@@ -31,6 +34,12 @@ Plug 'sbdchd/neoformat'
 
 " CoffeeScript
 Plug 'kchmck/vim-coffee-script'
+
+" Jump-to-line in GitHub
+Plug 'ruanyl/vim-gh-line'
+
+" Vue single-file (.vue) components
+Plug 'posva/vim-vue'
 
 call plug#end()
 
