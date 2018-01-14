@@ -32,3 +32,6 @@ eval_if_exists /usr/local/share/autojump/autojump.fish
 
 # Setup GPG agent
 setup_gpg_agent
+
+# Aliases
+alias nv nvim
