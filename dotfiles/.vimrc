@@ -96,6 +96,7 @@ let mandrawer_dir=expand("$HOME/projects/mandrawer")
 let g:ale_linters = {
 \  'javascript': ['eslint'],
 \  'python': ['flake8'],
+\  'html': [],
 \}
 
 " Display lint errors in status line
