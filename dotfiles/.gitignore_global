@@ -1,0 +1,5 @@
+# Vim swapfiles
+*.swp
+
+# Virtualenv to use for current dir
+.venv

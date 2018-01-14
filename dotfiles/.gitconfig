@@ -3,6 +3,8 @@
 	# and causes the commit to be discarded,
 	# see http://tooky.co.uk/there-was-a-problem-with-the-editor-vi-git-on-mac-os-x/
 	editor = vim
+	# Global gitignore. See https://help.github.com/articles/ignoring-files/
+	excludesfile = ~/.gitignore_global
 
 [user]
 	name = Robert Knight
