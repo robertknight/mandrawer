@@ -95,7 +95,7 @@ let mandrawer_dir=expand("$HOME/projects/mandrawer")
 " ale config
 let g:ale_linters = {
 \  'javascript': ['eslint'],
-\  'python': ['flake8'],
+\  'python': ['flake8', 'mypy'],
 \  'html': [],
 \}
 
