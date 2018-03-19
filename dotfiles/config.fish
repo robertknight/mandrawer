@@ -16,6 +16,9 @@ function eval_if_exists
   end
 end
 
+# Basic fish setup
+fish_vi_key_bindings
+
 # Language-specific binary dirs
 add_dir_to_path $HOME/projects/go/bin
 add_dir_to_path $HOME/other/go/bin
