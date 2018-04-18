@@ -48,7 +48,9 @@ call plug#end()
 set backspace=indent,eol,start
 set sw=4
 set ts=4
-set tw=80
+set tw=100
+set colorcolumn=81,101
+hi ColorColumn ctermbg=lightgrey guibg=lightgrey
 set autoindent
 set linebreak
 set mouse=a

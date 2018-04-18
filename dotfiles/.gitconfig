@@ -27,6 +27,7 @@
 	st = status
 	su = submodule update
 	ui = update-index
+	wc = whatchanged
 
 [color]
 	status = true
