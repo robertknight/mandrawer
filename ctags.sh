@@ -7,4 +7,5 @@
 # and qualified class names (q)
 EXTRA_FIELDS=fq
 
-ctags --recurse --extra=+$EXTRA_FIELDS
+# Use `git ls-files` to only index source files in the repo.
+git ls-files | ctags -L - --extra=+$EXTRA_FIELDS
