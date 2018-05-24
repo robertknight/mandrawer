@@ -23,6 +23,9 @@ def install_symlink(src, dest_dir):
     dest_path = os.path.join(dest_dir, os.path.basename(src))
     abs_src_path = os.path.join(DOTFILE_DIR, src)
     if os.path.lexists(dest_path):
+        if os.readlink(dest_path) == abs_src_path:
+            # Symlink already exists and points to target file.
+            return
         if not yes_no_prompt('Replace existing file \'%s\'?' % dest_path):
             return
         os.unlink(dest_path)
