@@ -12,11 +12,17 @@ Plug 'Shougo/vimproc.vim', {'do': 'make'}
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 
+" Improved directory navigation with netrw
+Plug 'tpope/vim-vinegar'
+
 " 'ag' (Silver Surfer) integration
 Plug 'mileszs/ack.vim'
 
 " (F)ind (A)nd (R)eplace
 Plug 'brooth/far.vim'
+
+" Comment out code easily
+Plug 'tpope/vim-commentary'
 
 " TypeScript language server integration
 Plug 'Quramy/tsuquyomi'
