@@ -1,9 +1,13 @@
 set nocompatible
 
+" ---------------------------
 " Plugin setup (via vim-plug)
 " ---------------------------
 
 call plug#begin('~/.vim/plugged')
+
+" General purpose
+" ~~~~~~~~~~~~~~~
 
 " Async exec library
 Plug 'Shougo/vimproc.vim', {'do': 'make'}
@@ -21,36 +25,48 @@ Plug 'mileszs/ack.vim'
 " (F)ind (A)nd (R)eplace
 Plug 'brooth/far.vim'
 
+
+" Multi-language
+" ~~~~~~~~~~~~~~
+
 " Comment out code easily
 Plug 'tpope/vim-commentary'
 
-" TypeScript language server integration
-Plug 'Quramy/tsuquyomi'
-Plug 'leafgarland/typescript-vim'
-
+" editorconfig support
 Plug 'editorconfig/editorconfig-vim'
-Plug 'elmcast/elm-vim'
 
 " Linter integration
-Plug 'w0rp/ale'  " nb. Requires Vim 8
-" Plug 'flowtype/vim-flow'
+Plug 'w0rp/ale'
 
 " Automated source formatting
 Plug 'sbdchd/neoformat'
 
-" CoffeeScript
-Plug 'kchmck/vim-coffee-script'
-
 " Jump-to-line in GitHub
 Plug 'ruanyl/vim-gh-line'
 
-" Vue single-file (.vue) components
+
+" Language-specific
+" ~~~~~~~~~~~~~~~~~
+
+" CoffeeScript
+Plug 'kchmck/vim-coffee-script'
+
+" Elm
+Plug 'elmcast/elm-vim'
+
+" TypeScript
+Plug 'Quramy/tsuquyomi'
+Plug 'leafgarland/typescript-vim'
+
+" Vue
 Plug 'posva/vim-vue'
 
 call plug#end()
 
+" ---------------------
 " Basic editor settings
 " ---------------------
+
 set backspace=indent,eol,start
 set sw=4
 set ts=4
@@ -76,8 +92,9 @@ syntax on
 :highlight TrailingSpace ctermbg=red guibg=red
 :match TrailingSpace /\s\+\%#\@<!$/
 
-" Language and tool integrations
-" ------------------------------
+" --------------------
+" Plugin configuration
+" --------------------
 
 " Load Go support
 set runtimepath+=$HOME/other/go/misc/vim
@@ -116,3 +133,17 @@ set statusline+=%{ALEGetStatusLine()}
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
+
+" Language Server Plugin setup
+if executable('pyls')
+  " pip install python-language-server
+  au User lsp_setup call lsp#register_server({
+      \ 'name': 'pyls',
+      \ 'cmd': {server_info->['pyls']},
+      \ 'whitelist': ['python'],
+      \ })
+endif
+
+" Use silver searcher to find candidates in far.vim.
+" Useful because it respects .gitignore
+let g:far#source = 'ag'
