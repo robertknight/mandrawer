@@ -54,6 +54,9 @@ Plug 'kchmck/vim-coffee-script'
 " Elm
 Plug 'elmcast/elm-vim'
 
+" Python
+Plug 'ambv/black'
+
 " TypeScript
 Plug 'Quramy/tsuquyomi'
 Plug 'leafgarland/typescript-vim'
