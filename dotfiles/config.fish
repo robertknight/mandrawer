@@ -24,7 +24,7 @@ add_dir_to_path $HOME/projects/go/bin
 add_dir_to_path $HOME/other/go/bin
 
 # Setup virtualfish for Python
-eval (python -m virtualfish auto_activation)
+eval (/usr/bin/python -m virtualfish auto_activation)
 
 # Setup autoenv
 # (https://github.com/idan/autoenvfish)
@@ -38,3 +38,7 @@ setup_gpg_agent
 
 # Aliases
 alias nv nvim
+
+# Run Python 3 in a way that is compatible with matplotlib.
+# See https://matplotlib.org/faq/osx_framework.html#pythonhome-function
+alias frameworkpython 'env PYTHONHOME=$VIRTUAL_ENV /usr/local/bin/python3'
