@@ -25,6 +25,11 @@ Plug 'mileszs/ack.vim'
 " (F)ind (A)nd (R)eplace
 Plug 'brooth/far.vim'
 
+" Git wrapper
+Plug 'tpope/vim-fugitive'
+
+" Dir tree explorer
+Plug 'scrooloose/nerdtree'
 
 " Multi-language
 " ~~~~~~~~~~~~~~
@@ -44,6 +49,8 @@ Plug 'sbdchd/neoformat'
 " Jump-to-line in GitHub
 Plug 'ruanyl/vim-gh-line'
 
+" Code completion
+Plug 'maralla/completor.vim'
 
 " Language-specific
 " ~~~~~~~~~~~~~~~~~
@@ -123,7 +130,7 @@ let mandrawer_dir=expand("$HOME/projects/mandrawer")
 " ale config
 let g:ale_linters = {
 \  'javascript': ['eslint'],
-\  'python': ['flake8', 'mypy'],
+\  'python': ['flake8', 'mypy', 'pycodestyle'],
 \  'html': [],
 \}
 
@@ -135,16 +142,6 @@ set statusline+=%{ALEGetStatusLine()}
 " See https://github.com/mileszs/ack.vim#can-i-use-ag-the-silver-searcher-with-this
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
-endif
-
-" Language Server Plugin setup
-if executable('pyls')
-  " pip install python-language-server
-  au User lsp_setup call lsp#register_server({
-      \ 'name': 'pyls',
-      \ 'cmd': {server_info->['pyls']},
-      \ 'whitelist': ['python'],
-      \ })
 endif
 
 " Use silver searcher to find candidates in far.vim.
