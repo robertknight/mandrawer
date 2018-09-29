@@ -36,6 +36,10 @@ eval_if_exists /usr/local/share/autojump/autojump.fish
 # Setup GPG agent
 setup_gpg_agent
 
+# Setup FZF (https://github.com/junegunn/fzf)
+# Use fd to respect .gitignore. See https://github.com/junegunn/fzf#respecting-gitignore
+set -x FZF_DEFAULT_COMMAND 'fd --type f'
+
 # Aliases
 alias nv nvim
 
