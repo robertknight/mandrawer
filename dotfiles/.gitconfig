@@ -24,6 +24,7 @@
 	rc = rebase --continue
 	ri = rebase --interactive
 	rst = reset
+	rstu = reset --hard @{upstream}
 	st = status
 	su = submodule update
 	ui = update-index
