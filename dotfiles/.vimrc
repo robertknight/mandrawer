@@ -146,4 +146,7 @@ endif
 
 " Use silver searcher to find candidates in far.vim.
 " Useful because it respects .gitignore
+"
+" Important Note: This makes "Far" operations use a regexp rather than a
+" vimgrep-style pattern as the file mask.
 let g:far#source = 'ag'
