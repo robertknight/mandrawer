@@ -28,8 +28,14 @@ Plug 'brooth/far.vim'
 " Git wrapper
 Plug 'tpope/vim-fugitive'
 
+" Git status info in gutter
+Plug 'airblade/vim-gitgutter'
+
 " Dir tree explorer
 Plug 'scrooloose/nerdtree'
+
+" Open URL in browser
+Plug 'dhruvasagar/vim-open-url'
 
 " Multi-language
 " ~~~~~~~~~~~~~~
@@ -60,6 +66,15 @@ Plug 'kchmck/vim-coffee-script'
 
 " Elm
 Plug 'elmcast/elm-vim'
+
+" JavaScript
+Plug 'pangloss/vim-javascript'
+
+" Markdown
+Plug 'gabrielelana/vim-markdown'
+
+" NGINX
+Plug 'chr4/nginx.vim'
 
 " Python
 Plug 'ambv/black'
@@ -130,7 +145,7 @@ let mandrawer_dir=expand("$HOME/projects/mandrawer")
 " ale config
 let g:ale_linters = {
 \  'javascript': ['eslint'],
-\  'python': ['flake8', 'mypy', 'pycodestyle'],
+\  'python': ['flake8', 'mypy'],
 \  'html': [],
 \}
 
