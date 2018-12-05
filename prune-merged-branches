@@ -1,24 +1,32 @@
-#!/usr/bin/env ruby
+#!/usr/local/bin/python3
 
-# Utility script which prompts to remove each local branch
-# that has been merged into the current branch
-`git branch --merged`.each_line do |branch|
-	branch.strip!
+# ^ Python 3 path is absolute so that this works when run inside a virtualenv
+# using a pre-3.7 Python.
 
-	# the current branch is prefixed with a '*'
-	next if branch =~ /^\*/
+import sys
 
-	puts "Branch '#{branch}' has been merged into the current branch - remove it?"
-	if gets() =~ /^y/
-		# attempt a safe deletion. This will check whether the branch has
-		# been fully merged into its upstream branch
-		if !system("git branch -d '#{branch}'")
-			# if the local branch hasn't been fully merged, ask if the user
-			# wants to delete it anyway
-			puts "Do you want to forcibly delete this branch?"
-			if gets() =~ /^y/
-				system("git branch -D '#{branch}'")
-			end
-		end
-	end
-end
+from subprocess import CalledProcessError, run
+
+# Make sure we only run this on the master branch, otherwise we'd most likely
+# end up deleting "master" if run on a topic branch.
+try:
+    run(["git", "checkout", "--quiet", "master"], check=True)
+except CalledProcessError:
+    print(f"Could not switch to master branch")
+    sys.exit(1)
+
+# Delete all branches that are cleanly merged into master. Other branches may
+# require rebasing.
+merged_branches = run(
+    ["git", "branch", "--merged"], capture_output=True, text=True
+).stdout.split("\n")
+merged_branches = [b.strip() for b in merged_branches]
+merged_branches = [b for b in merged_branches if b and not b.startswith("*")]
+
+for branch in merged_branches:
+    try:
+        # nb. This will print the branch name and commit hash, so we don't need
+        # to do that ourselves.
+        run(["git", "branch", "--delete", branch], check=True)
+    except CalledProcessError:
+        print(f"Could not delete {branch} automatically")
