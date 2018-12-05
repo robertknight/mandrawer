@@ -8,4 +8,8 @@ function fish_prompt
 		echo -n -s (set_color -b blue white) "(" (basename "$VIRTUAL_ENV") ")" (set_color normal) " "
 	end
 	printf '%s%s> ' "$pwd_section" "$job_section"
+
+  if set -q TMUX
+    tmux rename-window (prompt_pwd)
+  end
 end
