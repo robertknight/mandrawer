@@ -149,10 +149,6 @@ let g:ale_linters = {
 \  'html': [],
 \}
 
-" Display lint errors in status line
-let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
-set statusline+=%{ALEGetStatusLine()}
-
 " `ag` integration
 " See https://github.com/mileszs/ack.vim#can-i-use-ag-the-silver-searcher-with-this
 if executable('ag')
