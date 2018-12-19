@@ -15,4 +15,4 @@ indent_style=tab
 indent_size=4
 
 [Makefile]
-indent=tab
+indent_style=tab
