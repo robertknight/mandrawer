@@ -68,7 +68,7 @@ Plug 'kchmck/vim-coffee-script'
 Plug 'elmcast/elm-vim'
 
 " JavaScript
-Plug 'pangloss/vim-javascript'
+Plug 'prettier/vim-prettier'
 
 " Markdown
 Plug 'gabrielelana/vim-markdown'
@@ -148,6 +148,11 @@ let g:ale_linters = {
 \  'python': ['flake8', 'mypy'],
 \  'html': [],
 \}
+
+" Disable highlights, as these can make it hard to read text depending on the
+" color scheme. Lint failures are highlighted via markers in the gutter
+" instead.
+let g:ale_set_highlights = 0
 
 " `ag` integration
 " See https://github.com/mileszs/ack.vim#can-i-use-ag-the-silver-searcher-with-this
