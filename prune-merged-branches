@@ -3,9 +3,16 @@
 # ^ Python 3 path is absolute so that this works when run inside a virtualenv
 # using a pre-3.7 Python.
 
+import re
 import sys
 
 from subprocess import CalledProcessError, run
+
+
+def run_cmd(cmd):
+    result = run(cmd.split(" "), check=True, capture_output=True, text=True)
+    return result.stdout.split("\n")
+
 
 # Make sure we only run this on the master branch, otherwise we'd most likely
 # end up deleting "master" if run on a topic branch.
@@ -17,9 +24,7 @@ except CalledProcessError:
 
 # Delete all branches that are cleanly merged into master. Other branches may
 # require rebasing.
-merged_branches = run(
-    ["git", "branch", "--merged"], capture_output=True, text=True
-).stdout.split("\n")
+merged_branches = run_cmd("git branch --merged")
 merged_branches = [b.strip() for b in merged_branches]
 merged_branches = [b for b in merged_branches if b and not b.startswith("*")]
 
@@ -30,3 +35,24 @@ for branch in merged_branches:
         run(["git", "branch", "--delete", branch], check=True)
     except CalledProcessError:
         print(f"Could not delete {branch} automatically")
+
+# Prune remote tracking branches.
+run_cmd("git remote prune origin")
+
+# Find local branches which track remote branches that have no longer exist
+# and prompt to remove them.
+GONE_PATTERN = r"\[.*: gone\]"
+gone_branches = [
+    # `git branch -vv` outputs lines of the form:
+    # `{branch name} {short hash} [{tracking remote}] {commit message}` with
+    # ": gone" in the tracking remote name if the branch has been deleted.
+    line
+    for line in run_cmd("git branch -vv")
+    if re.search(GONE_PATTERN, line)
+]
+gone_branches = [line.strip().split(" ")[0] for line in gone_branches]
+
+for branch in gone_branches:
+    print(f"Branch {branch} tracks removed remote branch. Delete it? [y/n]")
+    if input().strip().lower() == "y":
+        run(["git", "branch", "--delete", "--force", branch], check=True)
