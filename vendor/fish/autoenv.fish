@@ -29,7 +29,7 @@ function _autoenvfish --on-variable PWD
             set -gx AUTOENVFISH $envfishpath
         else
             # file doesn't exist, so null out $AUTOENVFISH
-            set -ex AUTOENVFISH
+            set -u AUTOENVFISH
         end
     end
 end
