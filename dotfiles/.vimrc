@@ -37,6 +37,9 @@ Plug 'scrooloose/nerdtree'
 " Open URL in browser
 Plug 'dhruvasagar/vim-open-url'
 
+" Rename/delete buffers and associated files
+Plug 'tpope/vim-eunuch'
+
 " Multi-language
 " ~~~~~~~~~~~~~~
 
@@ -58,6 +61,9 @@ Plug 'ruanyl/vim-gh-line'
 " Code completion
 Plug 'maralla/completor.vim'
 
+" Automatic ctags builder
+Plug 'ludovicchabant/vim-gutentags'
+
 " Language-specific
 " ~~~~~~~~~~~~~~~~~
 
@@ -68,7 +74,8 @@ Plug 'kchmck/vim-coffee-script'
 Plug 'elmcast/elm-vim'
 
 " JavaScript
-Plug 'prettier/vim-prettier'
+Plug 'Galooshi/vim-import-js'  " Auto-insert ES6/CJS imports
+Plug 'prettier/vim-prettier'  " Auto-format code
 
 " Markdown
 Plug 'gabrielelana/vim-markdown'
@@ -142,10 +149,21 @@ let mandrawer_dir=expand("$HOME/projects/mandrawer")
 :map <F2> :exec("!" . mandrawer_dir . "/ctags.sh")<CR>
 :map <F5> :make<CR>
 
+" vim-fzf
+:map <Leader>f :FZF<CR>
+:map <Leader>t :Tags<CR>
+
+" Language Server Protocol-based code navigation and completion.
+" See https://github.com/w0rp/ale#2iv-go-to-definition
+:map <F6> :ALEHover<CR>
+:map <F7> :ALEFindReferences<CR>
+:map <F8> :ALEGoToDefinition<CR>
+
 " ale config
+let g:ale_completion_enabled = 1
 let g:ale_linters = {
-\  'javascript': ['eslint'],
-\  'python': ['flake8', 'mypy'],
+\  'javascript': ['eslint', 'tsserver'],
+\  'python': ['flake8', 'mypy', 'pyls'],
 \  'html': [],
 \}
 

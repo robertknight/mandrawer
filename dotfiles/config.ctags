@@ -1,0 +1,16 @@
+# Python
+--exclude=.tox
+--exclude=_build
+
+# JavaScript
+--exclude=coverage
+--exclude=node_modules
+--exclude=.yalc
+
+# Other
+--exclude=.cache
+--exclude=build
+
+--extras=-{anonymous}
+
+--recurse

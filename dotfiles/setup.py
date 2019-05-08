@@ -9,6 +9,7 @@ import os.path
 
 DOTFILE_DIR = os.path.dirname(os.path.realpath(__file__))
 HOME_DIR = os.environ['HOME']
+UNIVERSAL_CTAGS_CONFIG_DIR = os.path.join(HOME_DIR, '.ctags.d')
 FISH_CONFIG_DIR = os.path.join(HOME_DIR, '.config/fish')
 FISH_FUNC_DIR = os.path.join(FISH_CONFIG_DIR, 'functions')
 
@@ -39,6 +40,10 @@ def setup_fish():
     install_symlink('setup_gpg_agent.fish', FISH_FUNC_DIR)
 
 
+def setup_ctags():
+    install_symlink('ctags.config', UNIVERSAL_CTAGS_CONFIG_DIR)
+
+
 def symlink_dotfiles():
     dotfiles = glob.glob('.*')
     for dotfile in dotfiles:
@@ -47,6 +52,7 @@ def symlink_dotfiles():
 
 def main():
     symlink_dotfiles()
+    setup_ctags()
     setup_fish()
 
 
