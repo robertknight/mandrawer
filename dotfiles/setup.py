@@ -41,7 +41,7 @@ def setup_fish():
 
 
 def setup_ctags():
-    install_symlink('ctags.config', UNIVERSAL_CTAGS_CONFIG_DIR)
+    install_symlink('config.ctags', UNIVERSAL_CTAGS_CONFIG_DIR)
 
 
 def symlink_dotfiles():

@@ -6,10 +6,15 @@
 --exclude=coverage
 --exclude=node_modules
 --exclude=.yalc
+--exclude=yarn.lock
 
 # Other
 --exclude=.cache
 --exclude=build
+
+# Ignored file formats
+--exclude=*.json
+--exclude=*.svg
 
 --extras=-{anonymous}
 
