@@ -40,6 +40,11 @@ Plug 'dhruvasagar/vim-open-url'
 " Rename/delete buffers and associated files
 Plug 'tpope/vim-eunuch'
 
+" Find a character across multiple lines.
+" These alter the behavior of the built-in "f" and "t" motions.
+Plug 'tpope/vim-repeat'
+Plug 'dahu/vim-fanfingtastic'
+
 " Multi-language
 " ~~~~~~~~~~~~~~
 
@@ -145,20 +150,6 @@ au BufNewFile,BufRead *.ts call InitTypeScript()
 " https://github.com/ElmCast/elm-vim
 let g:elm_format_autosave = 1
 
-let mandrawer_dir=expand("$HOME/projects/mandrawer")
-:map <F2> :exec("!" . mandrawer_dir . "/ctags.sh")<CR>
-:map <F5> :make<CR>
-
-" vim-fzf
-:map <Leader>f :FZF<CR>
-:map <Leader>t :Tags<CR>
-
-" Language Server Protocol-based code navigation and completion.
-" See https://github.com/w0rp/ale#2iv-go-to-definition
-:map <F6> :ALEHover<CR>
-:map <F7> :ALEFindReferences<CR>
-:map <F8> :ALEGoToDefinition<CR>
-
 " ale config
 let g:ale_completion_enabled = 1
 let g:ale_linters = {
@@ -178,9 +169,21 @@ if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
 
-" Use silver searcher to find candidates in far.vim.
-" Useful because it respects .gitignore
-"
-" Important Note: This makes "Far" operations use a regexp rather than a
-" vimgrep-style pattern as the file mask.
-let g:far#source = 'ag'
+" --------------------
+" Key bindings
+" --------------------
+
+:map <Leader>c :close<CR>
+
+" Find files in project
+:map <Leader>f :FZF<CR>
+
+" Find tags in project. Relies on vim-gutentags to build the tags file automatically.
+:map <Leader>t :Tags<CR>
+
+" Go to definition, references etc. Requires LSP to be active for current file
+" and configured in ALE.
+:map <Leader>h :ALEHover<CR>
+:map <Leader>r :ALEFindReferences<CR>
+:map <Leader>d :ALEGoToDefinition<CR>
+:map <Leader>D :ALEGoToDefinitionInSplit<CR>
