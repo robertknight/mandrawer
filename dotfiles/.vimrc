@@ -88,9 +88,6 @@ Plug 'gabrielelana/vim-markdown'
 " NGINX
 Plug 'chr4/nginx.vim'
 
-" Python
-Plug 'ambv/black'
-
 " TypeScript
 Plug 'Quramy/tsuquyomi'
 Plug 'leafgarland/typescript-vim'
@@ -157,6 +154,12 @@ let g:ale_linters = {
 \  'python': ['flake8', 'mypy', 'pyls'],
 \  'html': [],
 \}
+let g:ale_fixers = {
+\  'javascript': ['prettier'],
+\  'typescript': ['prettier'],
+\  'python': ['black'],
+\  '*': ['remove_trailing_lines', 'trim_whitespace'],
+\}
 
 " Disable highlights, as these can make it hard to read text depending on the
 " color scheme. Lint failures are highlighted via markers in the gutter
@@ -180,6 +183,9 @@ endif
 
 " Find tags in project. Relies on vim-gutentags to build the tags file automatically.
 :map <Leader>t :Tags<CR>
+
+" Auto-format code
+:map <Leader>F :ALEFix<CR>
 
 " Go to definition, references etc. Requires LSP to be active for current file
 " and configured in ALE.
