@@ -3,3 +3,10 @@
 
 # Virtualenv to use for current dir
 .venv
+
+# Ctags files
+tags
+
+# Local npm package testing
+yalc.lock
+.yalc
