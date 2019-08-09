@@ -52,6 +52,7 @@ Plug 'tpope/vim-surround'
 Plug 'michaeljsmith/vim-indent-object'
 
 " Atom-inspired color scheme (24-bit)
+" nb. For JS this assumes "pangloss/vim-javascript" is also active.
 Plug 'joshdick/onedark.vim'
 
 " Multi-language
@@ -131,7 +132,6 @@ set ignorecase
 set smartcase
 
 set colorcolumn=81,101
-highlight ColorColumn ctermbg=darkgrey guibg=lightgrey
 
 " Use bash for running external commands since
 " fish is not POSIX compatible
@@ -140,13 +140,19 @@ set shell=/bin/bash
 filetype plugin on
 filetype indent on
 syntax on
+
+" Tweak color scheme to make comments a little brighter.
+" https://github.com/joshdick/onedark.vim#global-color-overrides
+let g:onedark_color_overrides = {
+\ "comment_grey": {"gui": "#969fb0", "cterm": "235", "cterm16": "0" },
+\}
 colorscheme onedark
 
 " Syntax highlighting tweaks
-" These must be applied after `syntax on`
+" These must be applied after `syntax on` and the color scheme is activated.
 "
 " Run `:so $VIMRUNTIME/syntax/hitest.vim` to preview.
-highlight Statement ctermfg=yellow
+highlight ColorColumn guibg=#444444
 
 " Show trailing whitespace, except when typing at the end of a line.
 " See http://vim.wikia.com/wiki/Highlight_unwanted_spaces
