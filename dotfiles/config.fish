@@ -27,6 +27,9 @@ add_dir_to_path $HOME/.cargo/bin
 # Setup virtualfish for Python
 eval (/usr/bin/python -m virtualfish auto_activation)
 
+# Setup pyenv
+status --is-interactive; and source (pyenv init -|psub)
+
 # Setup autoenv
 # (https://github.com/idan/autoenvfish)
 set AUTOENV_SRC $SCRIPT_DIR/../vendor/fish/autoenv.fish
