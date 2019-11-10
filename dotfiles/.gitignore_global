@@ -10,3 +10,5 @@ tags
 # Local npm package testing
 yalc.lock
 .yalc
+
+.DS_Store
