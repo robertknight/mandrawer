@@ -172,26 +172,23 @@ set runtimepath+=$HOME/other/go/misc/vim
 au BufNewFile,BufRead *.go set ft=go
 let g:gofmt_command="goimports"
 
-" Load typescript support
-function InitTypeScript()
-	set ft=typescript
-	set makeprg=make
-endfunction
-set runtimepath+=$HOME/other/typescript-vim/
-au BufNewFile,BufRead *.ts call InitTypeScript()
+au BufNewFile,BufRead *.ts,*.tsx set ft=typescript
 
 " elm-vim config
 " https://github.com/ElmCast/elm-vim
 let g:elm_format_autosave = 1
 
 " ale config
-let g:ale_completion_enabled = 1
+let g:ale_completion_enabled = 0
 let g:ale_linters = {
 \  'javascript': ['eslint', 'tsserver'],
 \  'python': ['flake8', 'mypy', 'pyls'],
 \  'html': [],
+\  'typescript': ['tsserver']
 \}
 let g:ale_fixers = {
+\  'markdown': ['prettier'],
+\  'html': ['prettier'],
 \  'javascript': ['prettier'],
 \  'typescript': ['prettier'],
 \  'python': ['black'],
@@ -222,6 +219,9 @@ endif
 " Find files in project
 :map <Leader>ff :FZF<CR>
 
+" Find lines in project.
+:map <Leader>fl :Ag<CR>
+
 " Find tags in project. Relies on vim-gutentags to build the tags file automatically.
 :map <Leader>ft :Tags<CR>
 
@@ -247,3 +247,4 @@ endif
 :map <Leader>h :ALEHover<CR>
 :map <Leader>i :ALEDocumentation<CR>
 :map <Leader>r :ALEFindReferences<CR>
+:map <Leader>R :ALERename<CR>
