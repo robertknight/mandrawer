@@ -44,3 +44,7 @@ alias nv nvim
 # Run Python 3 in a way that is compatible with matplotlib.
 # See https://matplotlib.org/faq/osx_framework.html#pythonhome-function
 alias frameworkpython 'env PYTHONHOME=$VIRTUAL_ENV /usr/local/bin/python3'
+
+# Disable fish shell greeting.
+# See https://stackoverflow.com/questions/13995857
+set fish_greeting
