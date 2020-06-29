@@ -24,9 +24,6 @@ add_dir_to_path $HOME/projects/go/bin
 add_dir_to_path $HOME/other/go/bin
 add_dir_to_path $HOME/.cargo/bin
 
-# Setup virtualfish for Python
-eval (/usr/bin/python -m virtualfish auto_activation)
-
 # Setup pyenv
 status --is-interactive; and source (pyenv init -|psub)
 
@@ -36,9 +33,6 @@ set AUTOENV_SRC $SCRIPT_DIR/../vendor/fish/autoenv.fish
 source $AUTOENV_SRC
 
 eval_if_exists /usr/local/share/autojump/autojump.fish
-
-# Setup GPG agent
-setup_gpg_agent
 
 # Setup FZF (https://github.com/junegunn/fzf)
 # Use fd to respect .gitignore. See https://github.com/junegunn/fzf#respecting-gitignore
