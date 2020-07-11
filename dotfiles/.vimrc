@@ -184,6 +184,7 @@ let g:ale_linters = {
 \  'javascript': ['eslint', 'tsserver'],
 \  'python': ['flake8', 'mypy', 'pyls'],
 \  'html': [],
+\  'rust': ['rls'],
 \  'typescript': ['tsserver']
 \}
 let g:ale_fixers = {
@@ -192,6 +193,7 @@ let g:ale_fixers = {
 \  'javascript': ['prettier'],
 \  'typescript': ['prettier'],
 \  'python': ['black'],
+\  'rust': ['rustfmt'],
 \  '*': ['remove_trailing_lines', 'trim_whitespace'],
 \}
 
@@ -236,6 +238,9 @@ endif
 
 " Auto-format code
 :map <Leader>F :ALEFix<CR>
+
+" Show full details of current error in preview window.
+:map <Leader>e :ALEDetail<CR>
 
 " Go to next lint error in buffer
 :map <Leader>be :ALENext -wrap<CR>
