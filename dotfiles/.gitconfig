@@ -30,6 +30,8 @@
 	ui = update-index
 	wc = whatchanged
 
+	last-commit-message = log --format=%B -n 1
+
 [color]
 	status = true
 [gpg]
