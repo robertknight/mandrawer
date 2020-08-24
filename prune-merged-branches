@@ -9,9 +9,44 @@ import sys
 from subprocess import CalledProcessError, run
 
 
-def run_cmd(cmd):
-    result = run(cmd.split(" "), check=True, capture_output=True, text=True)
-    return result.stdout.split("\n")
+def run_cmd(cmd, return_lines=True, trim_lines=True):
+    if isinstance(cmd, str):
+        cmd = cmd.split(" ")
+    result = run(cmd, check=True, capture_output=True, text=True)
+
+    if return_lines:
+        return [l.strip() for l in result.stdout.split("\n") if len(l.strip())]
+    else:
+        return result.stdout.strip()
+
+
+def preview_merge(master_branch, dev_branch):
+    merge_base = run_cmd(
+        ["git", "merge-base", "master", dev_branch], return_lines=False
+    )
+    merge_result = run_cmd(
+        ["git", "merge-tree", merge_base, "master", dev_branch], return_lines=False
+    )
+    merge_result = merge_result.strip()
+    return merge_result
+
+
+def local_branches():
+    branches = [b.replace("*", "").strip() for b in run_cmd("git branch")]
+    branches = [b for b in branches if b != "master"]
+    return branches
+
+
+def prompt_yes_no():
+    return input().strip().lower() == "y"
+
+
+def delete_branch(branch, force=False):
+    args = ["git", "branch", "--delete"]
+    if force:
+        args.append("--force")
+    args.append(branch)
+    run(args, check=True)
 
 
 # Make sure we only run this on the master branch, otherwise we'd most likely
@@ -32,9 +67,25 @@ for branch in merged_branches:
     try:
         # nb. This will print the branch name and commit hash, so we don't need
         # to do that ourselves.
-        run(["git", "branch", "--delete", branch], check=True)
+        delete_branch(branch, force=False)
     except CalledProcessError:
         print(f"Could not delete {branch} automatically")
+
+# Delete all branches that would not produce any changes if merged into master.
+for branch in local_branches():
+    try:
+      merge_diff = preview_merge("master", branch)
+    except Exception as ex:
+      print(f"Failed to generate merge preview for {branch}", str(ex))
+      merge_diff = "UNKNOWN"
+
+    if not len(merge_diff):
+        print(
+            f"Merging {branch} into master would not produce any changes. Delete it? [y/n]"
+        )
+        if prompt_yes_no():
+            delete_branch(branch, force=True)
+
 
 # Prune remote tracking branches.
 run_cmd("git remote prune origin")
@@ -54,5 +105,5 @@ gone_branches = [line.strip().split(" ")[0] for line in gone_branches]
 
 for branch in gone_branches:
     print(f"Branch {branch} tracks removed remote branch. Delete it? [y/n]")
-    if input().strip().lower() == "y":
-        run(["git", "branch", "--delete", "--force", branch], check=True)
+    if prompt_yes_no():
+        delete_branch(branch, force=True)
