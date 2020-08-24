@@ -184,7 +184,7 @@ let g:ale_linters = {
 \  'javascript': ['eslint', 'tsserver'],
 \  'python': ['flake8', 'mypy', 'pyls'],
 \  'html': [],
-\  'rust': ['rls'],
+\  'rust': ['analyzer'],
 \  'typescript': ['tsserver']
 \}
 let g:ale_fixers = {
@@ -217,6 +217,7 @@ endif
 " --------------------
 
 :map <Leader>c :close<CR>
+:map <Leader>pc :pclose<CR>
 
 " Find files in project
 :map <Leader>ff :FZF<CR>
