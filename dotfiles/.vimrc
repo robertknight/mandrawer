@@ -70,24 +70,12 @@ Plug 'w0rp/ale'
 " Jump-to-line in GitHub
 Plug 'ruanyl/vim-gh-line'
 
-" Code completion
-" Plug 'maralla/completor.vim'
-
 " Build ctags files automatically
 Plug 'ludovicchabant/vim-gutentags'
 
 " Language-specific
 " ~~~~~~~~~~~~~~~~~
 
-" CoffeeScript
-Plug 'kchmck/vim-coffee-script'
-
-" Elm
-Plug 'elmcast/elm-vim'
-
-" JavaScript
-Plug 'Galooshi/vim-import-js'  " Auto-insert ES6/CJS imports
-Plug 'prettier/vim-prettier'  " Auto-format code
 " Improved syntax highlighting.
 " nb. Was disabled at one point in the past due to impact on startup time.
 Plug 'pangloss/vim-javascript'
@@ -100,13 +88,6 @@ Plug 'gabrielelana/vim-markdown'
 
 " NGINX
 Plug 'chr4/nginx.vim'
-
-" TypeScript
-Plug 'Quramy/tsuquyomi'
-Plug 'leafgarland/typescript-vim'
-
-" Vue
-Plug 'posva/vim-vue'
 
 call plug#end()
 
