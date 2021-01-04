@@ -172,6 +172,7 @@ let g:ale_fixers = {
 \  'markdown': ['prettier'],
 \  'html': ['prettier'],
 \  'javascript': ['prettier'],
+\  'json': ['prettier'],
 \  'typescript': ['prettier'],
 \  'python': ['black'],
 \  'rust': ['rustfmt'],
