@@ -104,7 +104,7 @@ if __name__ == "__main__":
 
     # Classify transactions.
     category_transactions = {}
-    unknown_tx_descriptions = set()
+    unknown_tx_descriptions = {}
     multiple_category_tx_descriptions = {}
 
     for tx in transactions:
@@ -115,7 +115,8 @@ if __name__ == "__main__":
         if not len(cat):
             cat_name = "Unknown"
             if not tx.description in unknown_tx_descriptions:
-                unknown_tx_descriptions.add(tx.description)
+                unknown_tx_descriptions[tx.description] = []
+            unknown_tx_descriptions[tx.description].append(tx)
         else:
             cat_name = cat[0].name
 
@@ -136,11 +137,18 @@ if __name__ == "__main__":
 
     if len(unknown_tx_descriptions):
         print(f"\n{len(unknown_tx_descriptions)} transactions with unknown category:")
-        for desc in sorted(unknown_tx_descriptions):
-            debit_total = sum(
-                tx.debit_amount for tx in transactions if tx.description == desc
-            )
-            print(f"  {desc} ({debit_total})")
+        for desc in sorted(unknown_tx_descriptions.keys()):
+            transactions = unknown_tx_descriptions[desc]
+            debit_total = sum(tx.debit_amount for tx in transactions)
+            credit_total = sum(tx.credit_amount for tx in transactions)
+
+            totals = []
+            if debit_total > 0:
+                totals.append(f"{debit_total} out")
+            if credit_total > 0:
+                totals.append(f"{credit_total} in")
+
+            print(f"  {desc}: {', '.join(totals)}")
 
     # Print category totals.
     print(f"\nCategory totals:")
