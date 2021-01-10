@@ -7,8 +7,7 @@ from decimal import Decimal
 from datetime import date, datetime
 import json
 import sys
-
-from typing import List
+from typing import Dict, List, TextIO
 
 
 @dataclass
@@ -44,7 +43,7 @@ LLOYDS_STATEMENT_COLUMNS = [
 ]
 
 
-def parse_lloyds_statement(statement_csv_file):
+def parse_lloyds_statement(statement_csv_file: TextIO) -> List[Transaction]:
     """
     Parse a transaction CSV file in the format exported by Lloyds Bank.
 
@@ -81,7 +80,7 @@ def parse_lloyds_statement(statement_csv_file):
     return transactions
 
 
-def parse_categories(categories_json):
+def parse_categories(categories_json: TextIO) -> List[Category]:
     category_rules = json.load(categories_json)["categories"]
 
     categories = []
@@ -93,7 +92,7 @@ def parse_categories(categories_json):
     return categories
 
 
-def category_matches(transaction, categories):
+def category_matches(transaction: Transaction, categories: List[Category]):
     return [cat for cat in categories if cat.matches(transaction)]
 
 
@@ -140,22 +139,22 @@ if __name__ == "__main__":
         ]
 
     # Classify transactions.
-    category_transactions = {}
-    unknown_tx_descriptions = {}
-    multiple_category_tx_descriptions = {}
+    category_transactions: Dict[str, List[Transaction]] = {}
+    unknown_tx_descriptions: Dict[str, List[Transaction]] = {}
+    multiple_category_tx_descriptions: Dict[str, List[Category]] = {}
 
     for tx in transactions:
-        cat = category_matches(tx, categories)
-        if len(cat) > 1:
-            multiple_category_tx_descriptions[tx.description] = cat
+        tx_cats = category_matches(tx, categories)
+        if len(tx_cats) > 1:
+            multiple_category_tx_descriptions[tx.description] = tx_cats
 
-        if not len(cat):
+        if not len(tx_cats):
             cat_name = "Unknown"
             if not tx.description in unknown_tx_descriptions:
                 unknown_tx_descriptions[tx.description] = []
             unknown_tx_descriptions[tx.description].append(tx)
         else:
-            cat_name = cat[0].name
+            cat_name = tx_cats[0].name
 
         if not cat_name in category_transactions:
             category_transactions[cat_name] = []
@@ -167,10 +166,10 @@ if __name__ == "__main__":
             f"\n{len(multiple_category_tx_descriptions)} transactions matched multiple categories:"
         )
         for desc in sorted(multiple_category_tx_descriptions.keys()):
-            categories = ", ".join(
+            cat_list = ", ".join(
                 c.name for c in multiple_category_tx_descriptions[desc]
             )
-            print(f"  {desc}: {categories}")
+            print(f"  {desc}: {cat_list}")
 
     if len(unknown_tx_descriptions):
         print(f"\n{len(unknown_tx_descriptions)} transactions with unknown category:")
