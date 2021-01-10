@@ -38,3 +38,5 @@
 	program = gpg
 [merge]
 	conflictstyle = diff3
+[pull]
+	ff = only
