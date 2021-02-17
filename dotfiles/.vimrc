@@ -201,6 +201,9 @@ endif
 :map <Leader>c :close<CR>
 :map <Leader>pc :pclose<CR>
 
+" Find / switch between buffers.
+:map <Leader>fb :Buffers<CR>
+
 " Find files in project
 :map <Leader>ff :FZF<CR>
 
@@ -209,6 +212,10 @@ endif
 
 " Find tags in project. Relies on vim-gutentags to build the tags file automatically.
 :map <Leader>ft :Tags<CR>
+
+" Find tags matching word under cursor.
+" See https://vim.fandom.com/wiki/Word_under_cursor_for_command.
+:map <Leader>fct :Tags <C-R><C-W><CR>
 
 " Find tags in current buffer
 :map <Leader>bt :BTags<CR>
