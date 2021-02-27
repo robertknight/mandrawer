@@ -163,7 +163,7 @@ let g:elm_format_autosave = 1
 let g:ale_completion_enabled = 0
 let g:ale_linters = {
 \  'javascript': ['eslint', 'tsserver'],
-\  'python': ['flake8', 'mypy', 'pyls'],
+\  'python': ['flake8', 'mypy', 'jedils'],
 \  'html': [],
 \  'rust': ['analyzer'],
 \  'typescript': ['tsserver']
