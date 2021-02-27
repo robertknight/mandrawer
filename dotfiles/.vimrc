@@ -148,17 +148,6 @@ highlight ColorColumn guibg=#444444
 " Plugin configuration
 " --------------------
 
-" Load Go support
-set runtimepath+=$HOME/other/go/misc/vim
-au BufNewFile,BufRead *.go set ft=go
-let g:gofmt_command="goimports"
-
-au BufNewFile,BufRead *.ts,*.tsx set ft=typescript
-
-" elm-vim config
-" https://github.com/ElmCast/elm-vim
-let g:elm_format_autosave = 1
-
 " ale config
 let g:ale_completion_enabled = 0
 let g:ale_linters = {
