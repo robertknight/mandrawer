@@ -231,4 +231,7 @@ endif
 :map <Leader>h :ALEHover<CR>
 :map <Leader>i :ALEDocumentation<CR>
 :map <Leader>r :ALEFindReferences<CR>
+
+" Refactoring / editing commands.
 :map <Leader>R :ALERename<CR>
+:map <Leader>A :ALECodeAction<CR>
