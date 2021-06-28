@@ -1,9 +1,7 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 # Utility script for saving and restore the modification times,
 # owners and mode for all files in a tree.
-
-from __future__ import print_function
 
 import argparse
 import json
