@@ -25,7 +25,7 @@ add_dir_to_path $HOME/other/go/bin
 add_dir_to_path $HOME/.cargo/bin
 
 # Setup pyenv
-status --is-interactive; and source (pyenv init -|psub)
+status --is-interactive; and pyenv init --path | source
 
 # Setup autoenv
 # (https://github.com/idan/autoenvfish)
