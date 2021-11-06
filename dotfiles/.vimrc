@@ -9,9 +9,6 @@ call plug#begin('~/.vim/plugged')
 " General purpose
 " ~~~~~~~~~~~~~~~
 
-" Async exec library
-Plug 'Shougo/vimproc.vim', {'do': 'make'}
-
 " Find files, tags, lines and more with fuzzy search
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
@@ -21,9 +18,6 @@ Plug 'tpope/vim-vinegar'
 
 " 'ag' (Silver Surfer) integration
 Plug 'mileszs/ack.vim'
-
-" (F)ind (A)nd (R)eplace
-Plug 'brooth/far.vim'
 
 " Git wrapper
 Plug 'tpope/vim-fugitive'
@@ -60,9 +54,6 @@ Plug 'joshdick/onedark.vim'
 
 " Comment out code easily
 Plug 'tpope/vim-commentary'
-
-" editorconfig support
-Plug 'editorconfig/editorconfig-vim'
 
 " Lint, format and navigate around code
 Plug 'w0rp/ale'
