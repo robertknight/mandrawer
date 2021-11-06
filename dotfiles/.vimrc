@@ -95,38 +95,46 @@ call plug#end()
 " Basic editor settings
 " ---------------------
 
-" Enable 24-bit color.
-set termguicolors
-" Make `termguicolors` work even if `$TERM` is not `xterm`.
-" See `xterm-true-color`
-let &t_8f = "\<Esc>[38:2:%lu:%lu:%lum"
-let &t_8b = "\<Esc>[48:2:%lu:%lu:%lum"
-
-set backspace=indent,eol,start
-set sw=4
-set ts=4
-set tw=100
 set autoindent
+set backspace=indent,eol,start
+set colorcolumn=81,101
+set ignorecase
 set linebreak
 set mouse=a
-set ignorecase
-set smartcase
-
-set colorcolumn=81,101
 
 " Use bash for running external commands since
 " fish is not POSIX compatible
 set shell=/bin/bash
 
-filetype plugin on
+set shiftwidth=4
+set smartcase
+set tabstop=4
+set textwidth=100
+
 filetype indent on
+filetype plugin on
 syntax on
 
-" Tweak color scheme to make comments a little brighter.
-" https://github.com/joshdick/onedark.vim#global-color-overrides
+" Show trailing whitespace, except when typing at the end of a line.
+" See http://vim.wikia.com/wiki/Highlight_unwanted_spaces
+:highlight TrailingSpace ctermbg=red guibg=red
+:match TrailingSpace /\s\+\%#\@<!$/
+
+" ------------
+" Color scheme
+" ------------
+
+" Setup color-scheme. It should look like the screenshot in
+" https://github.com/joshdick/onedark.vim with minor adjustments. The adjustments
+" must be set before `colorscheme` is invoked.
+"
+" - Make comments brighter
 let g:onedark_color_overrides = {
-\ "comment_grey": {"gui": "#969fb0", "cterm": "235", "cterm16": "0" },
+\ "comment_grey": {"gui": "#969fb0", "cterm": "235", "cterm16": "0"},
 \}
+
+" Enable 24-bit color.
+set termguicolors
 colorscheme onedark
 
 " Syntax highlighting tweaks
@@ -135,13 +143,13 @@ colorscheme onedark
 " Run `:so $VIMRUNTIME/syntax/hitest.vim` to preview.
 highlight ColorColumn guibg=#444444
 
-" Show trailing whitespace, except when typing at the end of a line.
-" See http://vim.wikia.com/wiki/Highlight_unwanted_spaces
-:highlight TrailingSpace ctermbg=red guibg=red
-:match TrailingSpace /\s\+\%#\@<!$/
+" -----------------------
+" File-type configuration
+" -----------------------
 
 " Add suffixes to try when using `gf` command.
 :set suffixesadd+=.js
+:set suffixesadd+=.scss
 :set suffixesadd+=.ts
 
 " --------------------
