@@ -55,6 +55,9 @@ Plug 'joshdick/onedark.vim'
 " Comment out code easily
 Plug 'tpope/vim-commentary'
 
+" editorconfig support
+Plug 'editorconfig/editorconfig-vim'
+
 " Lint, format and navigate around code
 Plug 'w0rp/ale'
 
@@ -181,6 +184,9 @@ let g:ale_set_highlights = 0
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
+
+" Enable syntax highlighting for JSDoc, when using pangloss/vim-javascript.
+let g:javascript_plugin_jsdoc = 1
 
 " --------------------
 " Key bindings
