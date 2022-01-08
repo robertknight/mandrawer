@@ -112,6 +112,12 @@ if __name__ == "__main__":
         type=str,
         help="Comma-separated list of transaction categories to include",
     )
+    parser.add_argument(
+        "--tx-details",
+        dest="tx_details",
+        action="store_true",
+        help="Print details of matching transactions",
+    )
     args = parser.parse_args()
 
     transactions = parse_lloyds_statement(open(args.transactions))
@@ -138,10 +144,18 @@ if __name__ == "__main__":
             if set(category_matches(tx, categories)) & filter_categories
         ]
 
+    # Re-sort transactions in date order ascending.
+    #
+    # Lloyds CSV export sorts them in date order descending.
+    transactions = sorted(transactions, key=lambda tx: tx.date)
+
     # Classify transactions.
     category_transactions: Dict[str, List[Transaction]] = {}
     unknown_tx_descriptions: Dict[str, List[Transaction]] = {}
     multiple_category_tx_descriptions: Dict[str, List[Category]] = {}
+
+    if args.tx_details:
+        print("Matched transactions:")
 
     for tx in transactions:
         tx_cats = category_matches(tx, categories)
@@ -159,6 +173,9 @@ if __name__ == "__main__":
         if not cat_name in category_transactions:
             category_transactions[cat_name] = []
         category_transactions[cat_name].append(tx)
+
+        if args.tx_details:
+            print(f"  {tx.date},{tx.description},{tx.debit_amount},{tx.credit_amount}")
 
     # List transactions that could not be categorized.
     if len(multiple_category_tx_descriptions):
