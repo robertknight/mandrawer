@@ -2,3 +2,6 @@
 
 # ctags files
 tags
+
+# Sourcemaps
+*.map
