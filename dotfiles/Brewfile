@@ -5,33 +5,48 @@ tap "homebrew/cask"
 tap "homebrew/core"
 tap "universal-ctags/universal-ctags"
 
+# Terminal environment
+brew "fish"
+brew "tmux"
+brew "vim"
+
+# Shell utils
+brew "curl"
+brew "fd"
+brew "fzf"
+brew "jq"
+brew "the_silver_searcher"
+brew "yq"
+
+# Git utils
+brew "gh"
+brew "git"
+brew "git-crypt"
+
+# Build tools
 brew "autoconf"
 brew "autojump"
 brew "automake"
 brew "cmake"
-brew "curl"
-brew "fd"
-brew "fish"
-brew "fzf"
-brew "gh"
-brew "git"
-brew "git-crypt"
-brew "gnupg"
-brew "icu4c"
-brew "jq"
-brew "leptonica"
-brew "libpq"
-brew "node"
+
+# Python
 brew "pipx"
-brew "postgresql"
 brew "pyenv"
 brew "python@3.8"
+
+# JavaScript
+brew "node"
+brew "yarn"
+
+# Misc programming tools
 brew "scc"
 brew "shellcheck"
-brew "tfenv"
-brew "the_silver_searcher"
-brew "tmux"
-brew "vim"
-brew "yarn"
-brew "yq"
 brew "universal-ctags/universal-ctags/universal-ctags", args: ["HEAD"]
+
+# Misc
+brew "gnupg"
+brew "icu4c"
+brew "leptonica"
+brew "libpq"
+brew "postgresql"
+brew "tfenv"
