@@ -154,7 +154,7 @@ highlight ColorColumn guibg=#444444
 let g:ale_completion_enabled = 0
 let g:ale_linters = {
 \  'javascript': ['eslint', 'tsserver'],
-\  'python': ['flake8', 'mypy', 'jedils'],
+\  'python': ['pyright'],
 \  'html': [],
 \  'rust': ['analyzer'],
 \  'typescript': ['tsserver']
@@ -235,6 +235,7 @@ let g:javascript_plugin_jsdoc = 1
 :map <Leader>D :ALEGoToDefinitionInSplit<CR>
 :map <Leader>h :ALEHover<CR>
 :map <Leader>i :ALEDocumentation<CR>
+:map <Leader>? :ALEDocumentation<CR>
 :map <Leader>r :ALEFindReferences<CR>
 
 " Refactoring / editing commands.
