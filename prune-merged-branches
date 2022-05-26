@@ -17,20 +17,25 @@ def run_cmd(cmd, return_lines=True, trim_lines=True):
         return result.stdout.strip()
 
 
-def preview_merge(master_branch, dev_branch):
+def merge_will_produce_changes(main_branch, dev_branch):
     merge_base = run_cmd(
-        ["git", "merge-base", "master", dev_branch], return_lines=False
+        ["git", "merge-base", main_branch, dev_branch], return_lines=False
     )
     merge_result = run_cmd(
-        ["git", "merge-tree", merge_base, "master", dev_branch], return_lines=False
+        ["git", "merge-tree", merge_base, main_branch, dev_branch], return_lines=True
     )
-    merge_result = merge_result.strip()
-    return merge_result
+
+    merge_has_changes = False
+    for line in merge_result:
+        if line.startswith("+") or line.startswith("-"):
+            merge_has_changes = True
+
+    return merge_has_changes
 
 
-def local_branches():
+def local_branches(main_branch):
     branches = [b.replace("*", "").strip() for b in run_cmd("git branch")]
-    branches = [b for b in branches if b != "master"]
+    branches = [b for b in branches if b != main_branch]
     return branches
 
 
@@ -46,15 +51,36 @@ def delete_branch(branch, force=False):
     run(args, check=True)
 
 
-# Make sure we only run this on the master branch, otherwise we'd most likely
-# end up deleting "master" if run on a topic branch.
+# nb. In Python >= 3.9, `str.removeprefix(prefix)` can be used instead.
+def remove_prefix(str_, prefix):
+    if str_.startswith(prefix):
+        return str_[len(prefix) :]
+    else:
+        return str_
+
+
+# Make sure we only run this on the main branch, otherwise we'd most likely
+# end up deleting it if run on a topic branch.
+default_remote = "origin"
 try:
-    run(["git", "checkout", "--quiet", "master"], check=True)
+    main_branch = run_cmd(
+        f"git symbolic-ref --short refs/remotes/{default_remote}/HEAD",
+        return_lines=False,
+    )  # returns "{default_remote}/{default_branch_name}"
+except:
+    print(
+        f"Failed to determine main branch. `git remote set-head --auto {default_remote}` may fix this."
+    )
+    sys.exit(1)
+main_branch = remove_prefix(main_branch, f"{default_remote}/")
+
+try:
+    run(["git", "checkout", "--quiet", main_branch], check=True)
 except CalledProcessError:
-    print(f"Could not switch to master branch")
+    print(f"Could not switch to {main_branch} branch")
     sys.exit(1)
 
-# Delete all branches that are cleanly merged into master. Other branches may
+# Delete all branches that are cleanly merged into main. Other branches may
 # require rebasing.
 merged_branches = run_cmd("git branch --merged")
 merged_branches = [b.strip() for b in merged_branches]
@@ -68,24 +94,24 @@ for branch in merged_branches:
     except CalledProcessError:
         print(f"Could not delete {branch} automatically")
 
-# Delete all branches that would not produce any changes if merged into master.
-for branch in local_branches():
+# Delete all branches that would not produce any changes if merged into main.
+for branch in local_branches(main_branch):
+    merge_has_changes = True
     try:
-      merge_diff = preview_merge("master", branch)
+        merge_has_changes = merge_will_produce_changes(main_branch, branch)
     except Exception as ex:
-      print(f"Failed to generate merge preview for {branch}", str(ex))
-      merge_diff = "UNKNOWN"
+        print(f"Failed to generate merge preview for {branch}", str(ex))
 
-    if not len(merge_diff):
+    if not merge_has_changes:
         print(
-            f"Merging {branch} into master would not produce any changes. Delete it? [y/n]"
+            f"Merging {branch} into {main_branch} would not produce any changes. Delete it? [y/n]"
         )
         if prompt_yes_no():
             delete_branch(branch, force=True)
 
 
 # Prune remote tracking branches.
-run_cmd("git remote prune origin")
+run_cmd(f"git remote prune {default_remote}")
 
 # Find local branches which track remote branches that have no longer exist
 # and prompt to remove them.
