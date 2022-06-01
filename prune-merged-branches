@@ -59,6 +59,9 @@ def remove_prefix(str_, prefix):
         return str_
 
 
+IGNORED_BRANCHES = ["gh-pages"]
+
+
 # Make sure we only run this on the main branch, otherwise we'd most likely
 # end up deleting it if run on a topic branch.
 default_remote = "origin"
@@ -87,6 +90,8 @@ merged_branches = [b.strip() for b in merged_branches]
 merged_branches = [b for b in merged_branches if b and not b.startswith("*")]
 
 for branch in merged_branches:
+    if branch in IGNORED_BRANCHES:
+        continue
     try:
         # nb. This will print the branch name and commit hash, so we don't need
         # to do that ourselves.
@@ -96,6 +101,8 @@ for branch in merged_branches:
 
 # Delete all branches that would not produce any changes if merged into main.
 for branch in local_branches(main_branch):
+    if branch in IGNORED_BRANCHES:
+        continue
     merge_has_changes = True
     try:
         merge_has_changes = merge_will_produce_changes(main_branch, branch)
