@@ -2,28 +2,24 @@
 
 import re
 import sys
+from typing import List
 
 from subprocess import CalledProcessError, run
 
 
-def run_cmd(cmd, return_lines=True, trim_lines=True):
-    if isinstance(cmd, str):
-        cmd = cmd.split(" ")
+def run_cmd(cmd: List[str]) -> List[str]:
     result = run(cmd, check=True, capture_output=True, text=True)
-
-    if return_lines:
-        return [l.strip() for l in result.stdout.split("\n") if len(l.strip())]
-    else:
-        return result.stdout.strip()
+    return [l.strip() for l in result.stdout.split("\n") if len(l.strip())]
 
 
-def merge_will_produce_changes(main_branch, dev_branch):
-    merge_base = run_cmd(
-        ["git", "merge-base", main_branch, dev_branch], return_lines=False
-    )
-    merge_result = run_cmd(
-        ["git", "merge-tree", merge_base, main_branch, dev_branch], return_lines=True
-    )
+def merge_will_produce_changes(main_branch: str, dev_branch: str) -> bool:
+    merge_base = run(
+        ["git", "merge-base", main_branch, dev_branch],
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.strip()
+    merge_result = run_cmd(["git", "merge-tree", merge_base, main_branch, dev_branch])
 
     merge_has_changes = False
     for line in merge_result:
@@ -33,17 +29,17 @@ def merge_will_produce_changes(main_branch, dev_branch):
     return merge_has_changes
 
 
-def local_branches(main_branch):
-    branches = [b.replace("*", "").strip() for b in run_cmd("git branch")]
+def local_branches(main_branch: str) -> List[str]:
+    branches = [b.replace("*", "").strip() for b in run_cmd(["git", "branch"])]
     branches = [b for b in branches if b != main_branch]
     return branches
 
 
-def prompt_yes_no():
+def prompt_yes_no() -> bool:
     return input().strip().lower() == "y"
 
 
-def delete_branch(branch, force=False):
+def delete_branch(branch: str, force: bool = False) -> None:
     args = ["git", "branch", "--delete"]
     if force:
         args.append("--force")
@@ -57,7 +53,7 @@ def get_main_branch_for_remote(remote: str) -> str:
 
     This will not work if offline.
     """
-    remote_info = run_cmd(f"git remote show {remote}")
+    remote_info = run_cmd(["git", "remote", "show", remote])
     for line in remote_info:
         if line.startswith("HEAD branch:"):
             _, branch = line.split(":", 1)
@@ -67,7 +63,7 @@ def get_main_branch_for_remote(remote: str) -> str:
 
 
 # nb. In Python >= 3.9, `str.removeprefix(prefix)` can be used instead.
-def remove_prefix(str_, prefix):
+def remove_prefix(str_: str, prefix: str) -> str:
     if str_.startswith(prefix):
         return str_[len(prefix) :]
     else:
@@ -90,7 +86,7 @@ except CalledProcessError:
 
 # Delete all branches that are cleanly merged into main. Other branches may
 # require rebasing.
-merged_branches = run_cmd("git branch --merged")
+merged_branches = run_cmd(["git", "branch", "--merged"])
 merged_branches = [b.strip() for b in merged_branches]
 merged_branches = [b for b in merged_branches if b and not b.startswith("*")]
 
@@ -123,7 +119,7 @@ for branch in local_branches(main_branch):
 
 
 # Prune remote tracking branches.
-run_cmd(f"git remote prune {default_remote}")
+run_cmd(["git", "remote", "prune", default_remote])
 
 # Find local branches which track remote branches that have no longer exist
 # and prompt to remove them.
@@ -133,7 +129,7 @@ gone_branches = [
     # `{branch name} {short hash} [{tracking remote}] {commit message}` with
     # ": gone" in the tracking remote name if the branch has been deleted.
     line
-    for line in run_cmd("git branch -vv")
+    for line in run_cmd(["git", "branch", "-vv"])
     if re.search(GONE_PATTERN, line)
 ]
 gone_branches = [line.strip().split(" ")[0] for line in gone_branches]
