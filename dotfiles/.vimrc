@@ -67,6 +67,8 @@ Plug 'ruanyl/vim-gh-line'
 " Build ctags files automatically
 Plug 'ludovicchabant/vim-gutentags'
 
+" Plug 'github/copilot.vim'
+
 " Language-specific
 " ~~~~~~~~~~~~~~~~~
 
@@ -90,11 +92,15 @@ call plug#end()
 " ---------------------
 
 set autoindent
+set autoread
 set backspace=indent,eol,start
 set colorcolumn=81,101
 set ignorecase
 set linebreak
 set mouse=a
+
+" Check for external changes to files after editor gains focus
+au FocusGained,BufEnter * :checktime
 
 " Use bash for running external commands since
 " fish is not POSIX compatible
@@ -103,7 +109,6 @@ set shell=/bin/bash
 set shiftwidth=4
 set smartcase
 set tabstop=4
-set textwidth=100
 
 filetype indent on
 filetype plugin on
@@ -146,6 +151,8 @@ highlight ColorColumn guibg=#444444
 :set suffixesadd+=.scss
 :set suffixesadd+=.ts
 
+autocmd BufRead,BufNewFile *.rs setlocal makeprg=cargo\ build\ --message-format=short
+
 " --------------------
 " Plugin configuration
 " --------------------
@@ -165,6 +172,7 @@ let g:ale_fixers = {
 \  'javascript': ['prettier'],
 \  'json': ['prettier'],
 \  'typescript': ['prettier'],
+\  'typescriptreact': ['prettier'],
 \  'python': ['black'],
 \  'rust': ['rustfmt'],
 \  '*': ['remove_trailing_lines', 'trim_whitespace'],
@@ -178,6 +186,8 @@ let g:ale_fixers = {
 " color scheme. Lint failures are highlighted via markers in the gutter
 " instead.
 let g:ale_set_highlights = 0
+
+let g:ale_virtualtext_cursor = 'current'
 
 " `ag` integration
 " See https://github.com/mileszs/ack.vim#can-i-use-ag-the-silver-searcher-with-this
