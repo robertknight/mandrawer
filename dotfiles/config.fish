@@ -39,6 +39,7 @@ eval_if_exists /usr/local/share/autojump/autojump.fish
 set -x FZF_DEFAULT_COMMAND 'fd --type f'
 
 # Aliases
+alias pr "poetry run"
 alias nv nvim
 
 # Run Python 3 in a way that is compatible with matplotlib.
@@ -48,3 +49,16 @@ alias frameworkpython 'env PYTHONHOME=$VIRTUAL_ENV /usr/local/bin/python3'
 # Disable fish shell greeting.
 # See https://stackoverflow.com/questions/13995857
 set fish_greeting
+
+# Created by `pipx` on 2021-05-27 15:20:43
+set PATH $PATH /Users/robert/.local/bin
+
+# pnpm
+set -gx PNPM_HOME "/Users/robert/Library/pnpm"
+if not string match -q -- $PNPM_HOME $PATH
+  set -gx PATH "$PNPM_HOME" $PATH
+end
+# pnpm end
+set -gx WASMTIME_HOME "$HOME/.wasmtime"
+
+string match -r ".wasmtime" "$PATH" > /dev/null; or set -gx PATH "$WASMTIME_HOME/bin" $PATH
