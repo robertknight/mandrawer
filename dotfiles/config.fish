@@ -20,6 +20,7 @@ end
 fish_vi_key_bindings
 
 # Language-specific binary dirs
+add_dir_to_path /opt/homebrew/bin
 add_dir_to_path $HOME/projects/go/bin
 add_dir_to_path $HOME/other/go/bin
 add_dir_to_path $HOME/.cargo/bin
@@ -33,6 +34,7 @@ set AUTOENV_SRC $SCRIPT_DIR/../vendor/fish/autoenv.fish
 source $AUTOENV_SRC
 
 eval_if_exists /usr/local/share/autojump/autojump.fish
+eval_if_exists /opt/homebrew/share/autojump/autojump.fish
 
 # Setup FZF (https://github.com/junegunn/fzf)
 # Use fd to respect .gitignore. See https://github.com/junegunn/fzf#respecting-gitignore
