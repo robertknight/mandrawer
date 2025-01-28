@@ -194,6 +194,9 @@ let g:ale_virtualtext_cursor = 'current'
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
+if executable('rg')
+  let g:ackprg = 'rg --vimgrep'
+endif
 
 " Enable syntax highlighting for JSDoc, when using pangloss/vim-javascript.
 let g:javascript_plugin_jsdoc = 1
