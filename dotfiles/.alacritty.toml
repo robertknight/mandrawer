@@ -49,7 +49,7 @@ unfocused_hollow = true
 LANG = "en_GB.UTF-8"
 
 [font]
-size = 12.0
+size = 13.0
 
 [font.bold]
 family = "Menlo"
