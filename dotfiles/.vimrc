@@ -130,6 +130,7 @@ syntax on
 " - Make comments brighter
 let g:onedark_color_overrides = {
 \ "comment_grey": {"gui": "#969fb0", "cterm": "235", "cterm16": "0"},
+\ "special_grey": {"gui": "#969fb0", "cterm": "235", "cterm16": "0"},
 \}
 
 " Enable 24-bit color.
@@ -141,6 +142,8 @@ colorscheme onedark
 "
 " Run `:so $VIMRUNTIME/syntax/hitest.vim` to preview.
 highlight ColorColumn guibg=#444444
+highlight StatusLine guibg=#555555
+highlight StatusLineNC guibg=#444444
 
 " -----------------------
 " File-type configuration
