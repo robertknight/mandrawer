@@ -218,7 +218,7 @@ let g:javascript_plugin_jsdoc = 1
 :map <Leader>ff :FZF<CR>
 
 " Find lines in project.
-:map <Leader>fl :Ag<CR>
+:map <Leader>fl :Rg<CR>
 
 " Find tags in project. Relies on vim-gutentags to build the tags file automatically.
 :map <Leader>ft :Tags<CR>
