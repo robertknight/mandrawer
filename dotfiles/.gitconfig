@@ -16,9 +16,12 @@
 	cam = commit --amend
 	ci = commit
 	ca = commit -a
+	caa = commit -a --amend
 	co = checkout
 	d = diff
 	dc = diff --cached
+	ds = diff --stat
+	dsm = diff --stat main...HEAD
 	pm = push mine
 	po = push origin
 	rc = rebase --continue
