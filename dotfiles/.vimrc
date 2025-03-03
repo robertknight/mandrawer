@@ -230,10 +230,10 @@ let g:javascript_plugin_jsdoc = 1
 :map <Leader>F :ALEFix<CR>
 
 " Show full details of current error in preview window.
-:map <Leader>e :ALEDetail<CR>
+:map <Leader>ed :ALEDetail<CR>
 
 " Go to next lint error in buffer
-:map <Leader>be :ALENext -wrap<CR>
+:map <Leader>ne :ALENext -wrap<CR>
 
 " Go to definition, references etc. Requires LSP to be active for current file
 " and configured in ALE.
