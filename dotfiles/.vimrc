@@ -72,18 +72,8 @@ Plug 'ludovicchabant/vim-gutentags'
 " Language-specific
 " ~~~~~~~~~~~~~~~~~
 
-" Improved syntax highlighting.
-" nb. Was disabled at one point in the past due to impact on startup time.
-Plug 'pangloss/vim-javascript'
-
 " Jinja2
 Plug 'Glench/Vim-Jinja2-Syntax'
-
-" Markdown
-Plug 'gabrielelana/vim-markdown'
-
-" NGINX
-Plug 'chr4/nginx.vim'
 
 call plug#end()
 
