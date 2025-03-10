@@ -44,6 +44,9 @@ set -x FZF_DEFAULT_COMMAND 'fd --type f'
 alias pr "poetry run"
 alias nv nvim
 
+# Compensate for 20 years of muscle-memory
+alias vi nvim
+
 # Run Python 3 in a way that is compatible with matplotlib.
 # See https://matplotlib.org/faq/osx_framework.html#pythonhome-function
 alias frameworkpython 'env PYTHONHOME=$VIRTUAL_ENV /usr/local/bin/python3'
