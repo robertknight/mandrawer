@@ -16,7 +16,7 @@ Plug 'junegunn/fzf.vim'
 " Improved directory navigation with netrw
 Plug 'tpope/vim-vinegar'
 
-" 'ag' (Silver Surfer) integration
+" 'rg' (ripgrep) integration
 Plug 'mileszs/ack.vim'
 
 " Git wrapper
@@ -31,7 +31,9 @@ Plug 'scrooloose/nerdtree'
 " Open URL in browser
 Plug 'dhruvasagar/vim-open-url'
 
-" Rename/delete buffers and associated files
+" Rename/delete buffers and associated files.
+"
+" See <CR> mapping fix below.
 Plug 'tpope/vim-eunuch'
 
 " Find a character across multiple lines.
@@ -193,6 +195,12 @@ endif
 
 " Enable syntax highlighting for JSDoc, when using pangloss/vim-javascript.
 let g:javascript_plugin_jsdoc = 1
+
+" Disable <CR> key mapping from tpope/vim-eunuch.
+"
+" Under Neovim, this mapping causes <Enter> to insert a new line instead of
+" the selected completion when viewing a Ctrl+P completion popup.
+let g:eunuch_no_maps = 1
 
 " --------------------
 " Key bindings
