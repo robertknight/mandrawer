@@ -12,3 +12,6 @@ yalc.lock
 .yalc
 
 .DS_Store
+
+# Local claude config
+.claude/settings.local.json
