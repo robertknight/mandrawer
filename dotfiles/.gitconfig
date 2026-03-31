@@ -51,3 +51,6 @@
 	process = git-lfs filter-process
 [init]
 	defaultBranch = main
+
+[includeIf "gitdir:/Users/robert/blueberg/"]
+    path = /Users/robert/.gitconfig-blueberg
