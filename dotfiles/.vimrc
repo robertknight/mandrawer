@@ -184,7 +184,7 @@ let g:ale_linters = {
 \  'python': ['pyright'],
 \  'html': [],
 \  'rust': ['analyzer'],
-\  'typescript': ['tsserver']
+\  'typescript': ['eslint', 'tsserver']
 \}
 let g:ale_fixers = {
 \  'markdown': ['prettier'],
