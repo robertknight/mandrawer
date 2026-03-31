@@ -26,7 +26,7 @@ add_dir_to_path $HOME/other/go/bin
 add_dir_to_path $HOME/.cargo/bin
 
 # Setup pyenv
-status --is-interactive; and pyenv init --path | source
+status --is-interactive; and command -q pyenv; and pyenv init --path | source
 
 # Setup autoenv
 # (https://github.com/idan/autoenvfish)
@@ -67,3 +67,6 @@ end
 set -gx WASMTIME_HOME "$HOME/.wasmtime"
 
 string match -r ".wasmtime" "$PATH" > /dev/null; or set -gx PATH "$WASMTIME_HOME/bin" $PATH
+
+# Enable Atuin shell history
+status --is-interactive; and command -q atuin; and atuin init fish --disable-up-arrow | source
