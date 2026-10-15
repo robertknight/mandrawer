@@ -15,3 +15,6 @@ yalc.lock
 
 # Local claude config
 .claude/settings.local.json
+
+# Local claude notes
+claudes-notes/
