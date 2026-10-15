@@ -195,6 +195,9 @@ let g:ale_fixers = {
 \  'rust': ['rustfmt'],
 \  '*': ['remove_trailing_lines', 'trim_whitespace'],
 \}
+let g:ale_rust_analyzer_config = {
+\   'cargo': { 'features': 'all' },
+\ }
 
 " Replace the not-very-useful built-in omni-completions with LSP-provided
 " completions from ALE.
