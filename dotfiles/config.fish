@@ -1,5 +1,4 @@
-# Get path to this script, assuming it loaded via a symlink.
-set SCRIPT_DIR (dirname (readlink (status --current-filename)))
+set SCRIPT_DIR (path dirname (path resolve (status --current-filename)))
 
 # Helpers
 function add_dir_to_path
