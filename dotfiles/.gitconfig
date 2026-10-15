@@ -22,6 +22,7 @@
 	dc = diff --cached
 	ds = diff --stat
 	dsm = diff --stat main...HEAD
+	pl = push --force-with-lease
 	pm = push mine
 	po = push origin
 	rc = rebase --continue
