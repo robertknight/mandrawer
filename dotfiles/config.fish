@@ -66,9 +66,9 @@ set -gx CLAUDE_CODE_NO_FLICKER 1
 alias claude-bb "CLAUDE_CONFIG_DIR=$HOME/.claude-blueberg claude"
 
 # pnpm
-set -gx PNPM_HOME "/Users/robert/Library/pnpm"
-if not string match -q -- $PNPM_HOME $PATH
-  set -gx PATH "$PNPM_HOME" $PATH
+set -gx PNPM_HOME '/Users/robert/Library/pnpm'
+if not string match -q -- "$PNPM_HOME/bin" $PATH
+  set -gx PATH "$PNPM_HOME/bin" $PATH
 end
 # pnpm end
 set -gx WASMTIME_HOME "$HOME/.wasmtime"
