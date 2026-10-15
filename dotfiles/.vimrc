@@ -69,8 +69,6 @@ Plug 'ruanyl/vim-gh-line'
 " Build ctags files automatically
 Plug 'ludovicchabant/vim-gutentags'
 
-" Plug 'github/copilot.vim'
-
 " Language-specific
 " ~~~~~~~~~~~~~~~~~
 
