@@ -58,6 +58,13 @@ set fish_greeting
 # Created by `pipx` on 2021-05-27 15:20:43
 set PATH $PATH /Users/robert/.local/bin
 
+# Enable Claude Code's fullscreen (flicker-free) rendering.
+# https://code.claude.com/docs/en/fullscreen
+set -gx CLAUDE_CODE_NO_FLICKER 1
+
+# Blueberg Claude
+alias claude-bb "CLAUDE_CONFIG_DIR=$HOME/.claude-blueberg claude"
+
 # pnpm
 set -gx PNPM_HOME "/Users/robert/Library/pnpm"
 if not string match -q -- $PNPM_HOME $PATH
